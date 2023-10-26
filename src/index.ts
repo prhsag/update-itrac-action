@@ -3,7 +3,7 @@
  */
 // import { run } from './main'
 
-import * as core from '@actions/core'
+// import * as core from '@actions/core'
 import axios from 'axios'
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -56,9 +56,9 @@ const updateITracIssue = async (): Promise<void> => {
       response.data
     )
   } catch (error) {
-    const e = error as Error
-    // console.log(e)
-    core.setFailed(e.message)
+    // const e = error as Error
+    console.log('caught error')
+    // core.setFailed(e.message)
   }
 }
 
