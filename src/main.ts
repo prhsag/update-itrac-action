@@ -1,11 +1,12 @@
 import * as core from '@actions/core'
 import { wait } from './wait'
+import axios from 'axios'
 
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
  */
-export async function run(): Promise<void> {
+/* export async function run(): Promise<void> {
   try {
     const ms: string = core.getInput('milliseconds')
 
@@ -23,4 +24,52 @@ export async function run(): Promise<void> {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
   }
-}
+} */
+
+
+let data = JSON.stringify({
+  "fields": {
+    "project": {
+      "key": "AIMT"
+    },
+    "issuetype": {
+      "name": "Ticket"
+    }
+  },
+  "update": {
+    "labels": [
+      {
+        "add": "triaged"
+      },
+      {
+        "add": "REST"
+      }
+    ],
+    "summary": [
+      {
+        "set": "This ticket is updated and created using iTrac REST API"
+      }
+    ]
+  }
+});
+
+let config = {
+  method: 'put',
+  maxBodyLength: Infinity,
+  url: 'https://itrac.eur.ad.sag/rest/api/2/issue/AIMT-319',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer MTkyNzgzMDI2MTgxOiiSNv4rS88DmyDYX/70gi45AZvC'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+
