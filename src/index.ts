@@ -46,6 +46,8 @@ const config = {
   data
 }
 
+console.log('ITRAC_API_KEY', process.env.API_KEY)
+
 const updateITracIssue = async (): Promise<void> => {
   try {
     const response = await axios.request(config)
@@ -55,7 +57,7 @@ const updateITracIssue = async (): Promise<void> => {
     )
   } catch (error) {
     const e = error as Error
-    console.log(e)
+    // console.log(e)
     core.setFailed(e.message)
   }
 }

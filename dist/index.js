@@ -6257,6 +6257,7 @@ const config = {
     },
     data
 };
+console.log('ITRAC_API_KEY', process.env.API_KEY);
 const updateITracIssue = async () => {
     try {
         const response = await axios_1.default.request(config);
@@ -6264,7 +6265,7 @@ const updateITracIssue = async () => {
     }
     catch (error) {
         const e = error;
-        console.log(e);
+        // console.log(e)
         core.setFailed(e.message);
     }
 };
