@@ -9,7 +9,7 @@ import axios from 'axios'
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 // run()
 
-let data = JSON.stringify({
+const data = JSON.stringify({
   fields: {
     project: {
       key: 'AIMT'
@@ -35,7 +35,7 @@ let data = JSON.stringify({
   }
 })
 
-let config = {
+const config = {
   method: 'put',
   maxBodyLength: Infinity,
   url: 'https://itrac.eur.ad.sag/rest/api/2/issue/AIMT-319',
@@ -43,16 +43,21 @@ let config = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${process.env.API_KEY}`
   },
-  data: data
+  data
 }
 
-axios
-  .request(config)
-  .then(response => {
-    console.log(JSON.stringify(response.data))
-  })
-  .catch(error => {
-    let e = error as Error
+const updateITracIssue = async (): Promise<void> => {
+  try {
+    const response = await axios.request(config)
+    console.log(
+      '🚀 ~ file: index.ts:52 ~ updateITracIssue ~ response:',
+      response.data
+    )
+  } catch (error) {
+    const e = error as Error
     console.log(e)
     core.setFailed(e.message)
-  })
+  }
+}
+
+updateITracIssue()
