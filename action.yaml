@@ -2,9 +2,6 @@ name: 'Update iTrac Issue'
 description: 'Updates an iTrac issue based on inputs'
 author: 'prhsag'
 
-  
-
-
 # # Define your inputs here.
 # inputs:
 #   milliseconds:
